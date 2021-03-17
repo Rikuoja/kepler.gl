@@ -23,7 +23,7 @@ import styled from 'styled-components';
 import TimeWidgetFactory from './filters/time-widget';
 import AnimationControlFactory from './common/animation-control/animation-control';
 import AnimationControllerFactory from './common/animation-control/animation-controller';
-import {ANIMATION_WINDOW, FILTER_TYPES} from 'constants/default-settings';
+import {ANIMATION_WINDOW, DIMENSIONS, FILTER_TYPES} from 'constants/default-settings';
 import {getIntervalBins} from 'utils/filter-utils';
 import {media} from 'styles/media-breakpoints';
 
@@ -146,7 +146,20 @@ export default function BottomWidgetFactory(
     const animatedFilterIdx = useMemo(() => filters.findIndex(f => f.isAnimating), [filters]);
     const animatedFilter = animatedFilterIdx > -1 ? filters[animatedFilterIdx] : null;
 
+<<<<<<< HEAD
     const enlargedFilterWidth = isOpen ? containerW - sidePanelWidth : containerW;
+=======
+    const isMobile = hasPortableWidth();
+    const isLegendPinned =
+      uiState.mapControls?.mapLegend?.show && uiState.mapControls?.mapLegend?.active;
+    const spaceForLegendWidth =
+      isLegendPinned && !isMobile
+        ? DIMENSIONS.mapControl.width + DIMENSIONS.mapControl.mapLegend.pinned.right
+        : 0;
+
+    const enlargedFilterWidth =
+      (!isMobile && isOpen ? containerW - sidePanelWidth : containerW) - spaceForLegendWidth;
+>>>>>>> 4bb4d98e (Improve map control panels positioning (UN-1296) (#216))
 
     // show playback control if layers contain trip layer & at least one trip layer is visible
     const animatableLayer = useMemo(
@@ -170,6 +183,7 @@ export default function BottomWidgetFactory(
     return (
       <BottomWidgetContainer
         width={Math.min(maxWidth, enlargedFilterWidth)}
+        style={{marginRight: spaceForLegendWidth}}
         className="bottom-widget--container"
         hasPadding={showAnimationControl || showTimeWidget}
       >
