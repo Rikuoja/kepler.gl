@@ -55,11 +55,7 @@ import {
 
 import ErrorBoundary from 'components/common/error-boundary';
 import {observeDimensions, unobserveDimensions} from '../utils/observe-dimensions';
-<<<<<<< HEAD
 import {LOCALE_CODES} from 'localization/locales';
-=======
-import MapLegendFactory from './map/map-legend';
->>>>>>> 4bb4d98e (Improve map control panels positioning (UN-1296) (#216))
 
 /** @type {{[key: string]: React.CSSProperties}} */
 const MAP_STYLE = {
@@ -113,13 +109,7 @@ export const Attribution = () => (
 
 MapContainerFactory.deps = [MapPopoverFactory, MapControlFactory, EditorFactory];
 
-<<<<<<< HEAD
 export default function MapContainerFactory(MapPopover, MapControl, Editor) {
-=======
-MapContainerFactory.deps = [MapPopoverFactory, MapControlFactory, EditorFactory, MapLegendFactory];
-
-export default function MapContainerFactory(MapPopover, MapControl, Editor, MapLegend) {
->>>>>>> 4bb4d98e (Improve map control panels positioning (UN-1296) (#216))
   class MapContainer extends Component {
     static propTypes = {
       // required
@@ -544,7 +534,6 @@ export default function MapContainerFactory(MapPopover, MapControl, Editor, MapL
 
       return (
         <>
-<<<<<<< HEAD
           <MapControl
             datasets={datasets}
             availableLocales={Object.keys(LOCALE_CODES)}
@@ -568,40 +557,8 @@ export default function MapContainerFactory(MapPopover, MapControl, Editor, MapL
             onSetEditorMode={visStateActions.setEditorMode}
             onSetLocale={uiStateActions.setLocale}
             onToggleEditorVisibility={visStateActions.toggleEditorVisibility}
+            mapHeight={mapState.height}
           />
-=======
-          <FeatureFlagsContext.Consumer>
-            {featureFlags => (
-              <MapControl
-                featureFlags={featureFlags}
-                datasets={datasets}
-                dragRotate={mapState.dragRotate}
-                globe={mapState.globe.enabled}
-                isSplit={isSplit}
-                primary={primary}
-                isExport={isExport}
-                layers={layers}
-                layersToRender={layersToRender}
-                mapIndex={index}
-                mapControls={mapControls}
-                readOnly={this.props.readOnly}
-                scale={mapState.scale || 1}
-                top={interactionConfig.geocoder && interactionConfig.geocoder.enabled ? 52 : 0}
-                editor={editor}
-                locale={locale}
-                onTogglePerspective={mapStateActions.togglePerspective}
-                onToggleGlobe={mapStateActions.toggleGlobe}
-                onToggleSplitMap={mapStateActions.toggleSplitMap}
-                onMapToggleLayer={this._handleMapToggleLayer}
-                onToggleMapControl={this._toggleMapControl}
-                onSetEditorMode={visStateActions.setEditorMode}
-                onSetLocale={uiStateActions.setLocale}
-                onToggleEditorVisibility={visStateActions.toggleEditorVisibility}
-                mapHeight={mapState.height}
-              />
-            )}
-          </FeatureFlagsContext.Consumer>
->>>>>>> 4bb4d98e (Improve map control panels positioning (UN-1296) (#216))
           <MapComponent
             {...mapProps}
             key="bottom"

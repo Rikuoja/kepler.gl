@@ -146,20 +146,14 @@ export default function BottomWidgetFactory(
     const animatedFilterIdx = useMemo(() => filters.findIndex(f => f.isAnimating), [filters]);
     const animatedFilter = animatedFilterIdx > -1 ? filters[animatedFilterIdx] : null;
 
-<<<<<<< HEAD
-    const enlargedFilterWidth = isOpen ? containerW - sidePanelWidth : containerW;
-=======
-    const isMobile = hasPortableWidth();
     const isLegendPinned =
       uiState.mapControls?.mapLegend?.show && uiState.mapControls?.mapLegend?.active;
-    const spaceForLegendWidth =
-      isLegendPinned && !isMobile
-        ? DIMENSIONS.mapControl.width + DIMENSIONS.mapControl.mapLegend.pinned.right
-        : 0;
+    const spaceForLegendWidth = isLegendPinned
+      ? DIMENSIONS.mapControl.width + DIMENSIONS.mapControl.mapLegend.pinned.right
+      : 0;
 
     const enlargedFilterWidth =
-      (!isMobile && isOpen ? containerW - sidePanelWidth : containerW) - spaceForLegendWidth;
->>>>>>> 4bb4d98e (Improve map control panels positioning (UN-1296) (#216))
+      (isOpen ? containerW - sidePanelWidth : containerW) - spaceForLegendWidth;
 
     // show playback control if layers contain trip layer & at least one trip layer is visible
     const animatableLayer = useMemo(
